@@ -2,7 +2,7 @@
 import { ref, onMounted, reactive, readonly } from 'vue'
 import Button from './Button.vue'
 import Todo from './Todo.vue'
-import Todo1 from './Todo.vue'
+import TextBox from './TextBox.vue'
 
 defineProps<{ msg: string }>()
 
@@ -12,7 +12,7 @@ const obj = reactive({ count })
 
 const objCopied = readonly(obj)
 
-const todoList = [
+const todoList = ref([
   {
     text: 'やる',
     time: 100,
@@ -23,7 +23,11 @@ const todoList = [
     time: 200,
     checked: false,
   },
-]
+])
+const handleChange = (text: string) => {
+  console.log(text)
+  todoList.value = todoList.value.map((e) => ({ ...e, text }))
+}
 
 onMounted(() => {
   setInterval(() => count.value--, 1000)
@@ -36,6 +40,9 @@ onMounted(() => {
     <Button :text="'Click'" @click="count++" />
     <div class="m-4">
       {{ obj.count }}
+    </div>
+    <div class="my-4">
+      <TextBox :initial-text="'hello'" @change="handleChange" />
     </div>
     <template v-for="(todo, index) in todoList">
       <Todo
