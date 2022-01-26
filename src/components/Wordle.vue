@@ -9,7 +9,7 @@ import {
   answerList,
   availableWordList,
   CHALLENGE_TIMES,
-} from '../assets/sample'
+} from '../assets/yoji'
 
 const answer = answerList[Math.floor(Math.random() * answerList.length)]
 const charStr = Array.from(new Set(availableWordList.join('').split('')))
