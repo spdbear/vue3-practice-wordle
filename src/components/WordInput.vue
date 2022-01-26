@@ -4,13 +4,13 @@ import { ref, computed } from 'vue'
 const props = defineProps<{
   index: number
   initialText: string
+  canInput: boolean
 }>()
 
-const emit =
-  defineEmits<{
-    (name: 'change', updatedText: string): void
-    (name: 'enter', updatedText: string): void
-  }>()
+const emit = defineEmits<{
+  (name: 'change', updated: string): void
+  (name: 'submit', updated: { text: string; index: number }): void
+}>()
 
 const texts = ref(props.initialText)
 
@@ -22,19 +22,31 @@ const handleChange = (e: Event) => {
   if (!(target instanceof HTMLInputElement)) return
   emit('change', target.value)
 }
+
+const handleSubmit = (e: Event) => {
+  emit('submit', { text: texts.value, index: props.index })
+}
 </script>
 
 <template>
-  <div>
+  <div class="flex">
     <input
-      :class="`bg-gray-100 focus:bg-white p-2 border-2 border-gray-500 shadow-md rounded text-gray-700 ${
-        (hasLongTextError) && 'error'
-      }`"
+      :class="`rounded border-2 border-blue-300 bg-gray-100 p-2 font-mono uppercase text-gray-700 shadow-md focus:bg-white ${
+        hasLongTextError && 'error'
+      } disabled:border-gray-500 disabled:bg-gray-200`"
+      :disabled="!canInput"
       v-model="texts"
       maxlength="5"
-            placeholder="input here"
+      placeholder="此処入力"
       @change="handleChange"
     />
+    <button
+      class="ml-1 rounded bg-blue-400 px-3 shadow-sm shadow-slate-600"
+      :disabled="!canInput"
+      @click="handleSubmit"
+    >
+      決
+    </button>
   </div>
 </template>
 
