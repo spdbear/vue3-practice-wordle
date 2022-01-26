@@ -22,7 +22,7 @@ const handleChange = (e: Event) => {
 <template>
   <div>
     <input
-      :class="`bg-gray-100 focus:bg-white p-2 border-2 border-gray-500 shadow-md rounded text-gray-700 ${
+      :class="`rounded border-2 border-gray-500 bg-gray-100 p-2 text-gray-700 shadow-md focus:bg-white ${
         (hasNoTextError || hasLongTextError) && 'error'
       }`"
       v-model="texts"
