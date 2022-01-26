@@ -17,7 +17,9 @@ const charStr = Array.from(new Set(availableWordList.join('').split('')))
   .join('')
 
 const wordList = ref<string[]>(
-  [...Array(CHALLENGE_TIMES)].fill([...Array(answer.length).fill('_')].join(''))
+  [...Array(CHALLENGE_TIMES)].fill(
+    [...Array(answer.length).fill('虚')].join('')
+  )
 )
 
 const currentNum = ref(0)
