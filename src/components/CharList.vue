@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const charArray = computed(() => props.charStr.split(''))
 const wordArray = computed(() => props.wordList.join('').split(''))
-const answerArray = computed(() => props.answer.split('')
+const answerArray = computed(() => props.answer.split(''))
 
 const getColor = (char: string) => {
   let isUsed = false
